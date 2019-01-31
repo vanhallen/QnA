@@ -14,7 +14,7 @@ hostname = 'https://mail.ru/'
 #логин в почту
 login = 'samsungtestbelarus@mail.ru'
 #пароль в почту
-password = 'Cjkysirj12'
+password = '***********'
 
 #создаем класс нашей главной страницы
 class MainPageMail(unittest.TestCase):
