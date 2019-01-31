@@ -1,30 +1,27 @@
 import unittest #библиотека unittest
-from selenium import webdriver        
+from selenium import webdriver
 capabilities = {
     "browserName": "chrome",
     "version": "71.0",
     "enableVNC": True,
-    "enableVideo": False
+    "enableVideo": True
 }
-driver = webdriver.Remote(
-    command_executor="http://localhost:4444/wd/hub",
-    desired_capabilities=capabilities)
 from selenium.webdriver.common.by import By #метод позволяющий искать селекторы
 from selenium.webdriver.support.ui import WebDriverWait #метод отвечающий за неявные ожидания
 
 #адрес страницы, которую мы будем открывать
 hostname = 'https://mail.ru/'
 #логин в почту
-login = 'fbs_test1203@mail.ru'
+login = 'samsungtestbelarus@mail.ru'
 #пароль в почту
-password = '1Passw0rd'
+password = 'Cjkysirj12'
 
 #создаем класс нашей главной страницы
 class MainPageMail(unittest.TestCase):
 
 #метод определяющий выбор браузера и указывающий какой chromedriver использовать и где он лежит
     def setUp(self):
-        self.driver = webdriver.Chrome(executable_path=r'/home/romashov/Projects/Autotests/myvenv/bin/chromedriver')
+        self.driver = webdriver.Remote(command_executor="http://35.176.106.78:4444/wd/hub", desired_capabilities=capabilities)
 
 #метод описывающий сам процесс заполнения формы входа
     def the_login_test(self):
@@ -33,6 +30,7 @@ class MainPageMail(unittest.TestCase):
         wait = WebDriverWait(driver, 100) #выставляем ожидание
         driver.get(hostname) #запрашиваем страницу
         assert "Mail.Ru" in driver.title #проверяем что в заголовке Title загруженногй страницы есть упоминания mail.ru
+        print(driver.title)  # принтуем заголовок страницы TITLE
 
         login_field = driver.find_element(By.XPATH, value="//input[@id='mailbox:login']") #селектор нахождения поля логин
         password_field = driver.find_element(By.XPATH, value="//input[@id='mailbox:password']") #селектор нахождения поля пароль
@@ -41,6 +39,10 @@ class MainPageMail(unittest.TestCase):
         login_field.send_keys(login) #с помощью метода send_keys передаем в поле логина наш логин
         password_field.send_keys(password) #с помощью метода send_keys передаем в поле пароль наш пароль
         submit_button.click() #с помощью метода click() нажимаем на кнопку submit
+
+        time.sleep(5)  # это явное ожидание, его лучше не использовать в крайних случаях. Для примера.
+        assert "Входящие" in driver.title  # проверяем что в заголовке Title загруженной страницы есть слово Входящие
+        print(driver.title)  # принтуем заголовок страницы TITLE
 
 #метод определяющий закрытие сессии
     def tearDown(self):
