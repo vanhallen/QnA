@@ -11,9 +11,9 @@ from selenium.webdriver.support.ui import WebDriverWait #метод отвеча
 
 #адрес страницы, которую мы будем открывать
 hostname = 'https://profile.onliner.by/login'
-#логин в почту
+#логин
 login = 'as.sukhorukov'
-#пароль в почту
+#пароль
 password = '***********'
 
 #создаем класс нашей главной страницы
@@ -29,19 +29,19 @@ class MainPageMail(unittest.TestCase):
         driver = self.driver #определяем драйвер
         wait = WebDriverWait(driver, 100) #выставляем ожидание
         driver.get(hostname) #запрашиваем страницу
-        assert "Mail.Ru" in driver.title #проверяем что в заголовке Title загруженногй страницы есть упоминания mail.ru
+        assert "Профиль" in driver.title #проверяем что в заголовке Title загруженногй страницы есть упоминания mail.ru
         print(driver.title)  # принтуем заголовок страницы TITLE
 
-        login_field = driver.find_element(By.XPATH, value="//input[@id='mailbox:login']") #селектор нахождения поля логин
-        password_field = driver.find_element(By.XPATH, value="//input[@id='mailbox:password']") #селектор нахождения поля пароль
-        submit_button = driver.find_element(By.XPATH, value="//input[@value='Войти']") #селектор нахождения кнопки sibmit
+        login_field = driver.find_element(By.XPATH, value="//input[@placeholder='Ник или e-mail']") #селектор нахождения поля логин
+        password_field = driver.find_element(By.XPATH, value="//input[@placeholder='Пароль']") #селектор нахождения поля пароль
+        submit_button = driver.find_element(By.XPATH, value="//button[@type='submit']") #селектор нахождения кнопки sibmit
 
         login_field.send_keys(login) #с помощью метода send_keys передаем в поле логина наш логин
         password_field.send_keys(password) #с помощью метода send_keys передаем в поле пароль наш пароль
         submit_button.click() #с помощью метода click() нажимаем на кнопку submit
 
         time.sleep(5)  # это явное ожидание, его лучше не использовать в крайних случаях. Для примера.
-        assert "Входящие" in driver.title  # проверяем что в заголовке Title загруженной страницы есть слово Входящие
+        assert "Учетная запись" in driver.find_element(By.XPATH, value="//dt[@outerText='Учетная запись']")  # проверяем что в заголовке Title загруженной страницы есть слово Входящие
         print(driver.title)  # принтуем заголовок страницы TITLE
 
 #метод определяющий закрытие сессии
