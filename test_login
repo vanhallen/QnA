@@ -4,7 +4,7 @@ capabilities = {
     "browserName": "chrome",
     "version": "71.0",
     "enableVNC": True,
-    "enableVideo": True
+    "enableVideo": False
 }
 from selenium.webdriver.common.by import By #метод позволяющий искать селекторы
 from selenium.webdriver.support.ui import WebDriverWait #метод отвечающий за неявные ожидания
