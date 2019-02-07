@@ -10,9 +10,9 @@ from selenium.webdriver.common.by import By #метод позволяющий �
 from selenium.webdriver.support.ui import WebDriverWait #метод отвечающий за неявные ожидания
 
 #адрес страницы, которую мы будем открывать
-hostname = 'https://mail.ru/'
+hostname = 'https://profile.onliner.by/login'
 #логин в почту
-login = 'samsungtestbelarus@mail.ru'
+login = 'as.sukhorukov'
 #пароль в почту
 password = '***********'
 
